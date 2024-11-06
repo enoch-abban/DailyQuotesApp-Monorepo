@@ -1,0 +1,19 @@
+{
+  "name": "DailyQuotesApp",
+  "version": "0.0.1",
+  "description": "An app to share inspirational quotes or reflections.",
+  "main": "index.js",
+  "author": "Enoch Prince",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "lerna run --parallel start"
+  },
+  "devDependencies": {
+    "lerna": "^8.1.9",
+    "typescript": "^5.6.3"
+  }
+}

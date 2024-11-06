@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "Backend for the DailyQuotes & ReflectionWall App",
+  "main": "server.ts",
+  "author": "Enoch Prince",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "tsc && node dist/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "typescript": "^5.6.3"
+  }
+}
