@@ -2,6 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { QueryPayload } from 'shared-data';
+import DarkMode from "./react-dark-mode/src/DarkMode";
+
 function App() {
   return (
     <div className="App">
@@ -29,6 +31,7 @@ function App() {
           GET SOME DATA
         </button>
       </header>
+      <DarkMode />
     </div>
   );
 }

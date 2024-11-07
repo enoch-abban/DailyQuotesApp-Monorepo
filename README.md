@@ -12,10 +12,16 @@ I followed the tutorial [here](https://github.com/chandan-satyanarayan/monorepo-
 
 #### Upgrade
 
-Use the command line below when creating the _React App_ instead of the one outline in the tutorial provided above:
+1. Use the command line below when creating the _React App_ instead of the one outline in the tutorial provided above:
 
 ``` bash
 $ npx create-react-app frontend --template typescript
+```
+
+2. Use the command line below instead when adding a git submodule to the project.
+
+``` bash
+$ git add submodule https://github.com/alexeagleson/react-dark-mode.git
 ```
 
 ## Running the App in Dev Mode

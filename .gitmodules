@@ -1,0 +1,3 @@
+[submodule "packages/frontend/src/react-dark-mode"]
+	path = packages/frontend/src/react-dark-mode
+	url = https://github.com/alexeagleson/react-dark-mode.git
