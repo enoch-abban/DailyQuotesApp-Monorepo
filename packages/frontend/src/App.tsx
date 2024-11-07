@@ -1,37 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import React from 'react';
+// import logo from './logo.svg';
+// import './App.css';
+// import DarkMode from "./react-dark-mode/src/DarkMode";
 import { QueryPayload } from '@dqa/shared-data';
-import DarkMode from "./react-dark-mode/src/DarkMode";
+import LoginPage from './pages/LoginPage';
+import Button from './components/Button';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        { /* NEW */ }
-        <button
-          onClick={() => {
+      {/* <DarkMode /> */}
+      <LoginPage />
+      { /* NEW Example to call endpoints */ }
+        {/* <Button text="GET SOME DATA" onClick={() => {
             fetch("http://localhost:3001/", {})
               .then((response) => response.json())
               .then((data: QueryPayload) => console.log(data.payload));
-          }}
-        >
-          GET SOME DATA
-        </button>
-      </header>
-      <DarkMode />
+          }} variant="primary" /> */}
+      
     </div>
   );
 }

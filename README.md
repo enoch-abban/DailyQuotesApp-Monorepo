@@ -26,10 +26,18 @@ $ git add submodule https://github.com/alexeagleson/react-dark-mode.git
 
 ## Running the App in Dev Mode
 
-Navigate to the root directory and execute the following command in the terminal:
+1. Navigate to the root directory and execute the following command in the terminal:
 
 ``` bash
 $ yarn start
 ```
 
 It'll start both the frontend and backend servers.
+
+2. Navigate to the `frontend` directory and run the command below:
+
+``` bash
+$ npx tailwindcss -i ./src/index.css -o ./src/style.css --watch
+```
+
+This recompiles tailwindcss each time changes are made. Useful in dev mode.
