@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import { QueryPayload } from 'shared-data';
 function App() {
   return (
     <div className="App">
@@ -23,7 +23,7 @@ function App() {
           onClick={() => {
             fetch("http://localhost:3001/", {})
               .then((response) => response.json())
-              .then((data) => console.log(data));
+              .then((data: QueryPayload) => console.log(data.payload));
           }}
         >
           GET SOME DATA

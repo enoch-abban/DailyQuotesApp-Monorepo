@@ -1,0 +1,26 @@
+{
+  "name": "shared-data",
+  "version": "0.0.1",
+  "description": "Hold shared interfaces and other data for both backend and frontend",
+  "author": "enoch-abban <124813570+enoch-abban@users.noreply.github.com>",
+  "homepage": "https://github.com/enoch-abban/DailyQuotesApp-Monorepo#readme",
+  "license": "MIT",
+  "main": "index.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enoch-abban/DailyQuotesApp-Monorepo.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/shared-data.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/enoch-abban/DailyQuotesApp-Monorepo/issues"
+  }
+}
