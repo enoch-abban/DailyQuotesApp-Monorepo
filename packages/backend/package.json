@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "@dqa/backend",
   "version": "0.0.1",
   "description": "Backend for the DailyQuotes & ReflectionWall App",
   "main": "server.ts",

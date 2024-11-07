@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 
-import { QueryPayload } from 'shared-data';
+import { QueryPayload } from '@dqa/shared-data';
 
 const app = express();
 const port = 3001;

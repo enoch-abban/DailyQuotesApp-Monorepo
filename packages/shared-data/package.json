@@ -1,5 +1,5 @@
 {
-  "name": "shared-data",
+  "name": "@dqa/shared-data",
   "version": "0.0.1",
   "description": "Hold shared interfaces and other data for both backend and frontend",
   "author": "enoch-abban <124813570+enoch-abban@users.noreply.github.com>",

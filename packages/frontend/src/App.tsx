@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { QueryPayload } from 'shared-data';
+import { QueryPayload } from '@dqa/shared-data';
 import DarkMode from "./react-dark-mode/src/DarkMode";
 
 function App() {
