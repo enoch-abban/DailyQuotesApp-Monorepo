@@ -41,3 +41,28 @@ $ npx tailwindcss -i ./src/index.css -o ./src/style.css --watch
 ```
 
 This recompiles tailwindcss each time changes are made. Useful in dev mode.
+
+## Removing a Git Submodule
+
+Follow the steps below to completely removed an added submodule
+
+``` bash
+0. mv a/submodule a/submodule_tmp
+
+1. git submodule deinit -f -- a/submodule    
+2. rm -rf .git/modules/a/submodule
+3. git rm -f a/submodule
+# Note: a/submodule (no trailing slash)
+
+# or, if you want to leave it in your working tree and have done step 0
+3.   git rm --cached a/submodule
+3bis mv a/submodule_tmp a/submodule
+```
+
+To get the path to `a/submodule` run the command below:
+
+``` bash
+$ git submodule
+```
+
+Replace the `a/submodule` with the path retrieved from the result of the command above.
