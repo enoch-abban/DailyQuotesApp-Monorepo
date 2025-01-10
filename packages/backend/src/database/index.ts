@@ -39,7 +39,7 @@ const DbConfig = (function () {
             // await client.close();
           }
     }
-  const getDb = (uri: string) => {
+  const getDb = () => {
     return _db;
   };
 
