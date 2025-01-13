@@ -3,9 +3,12 @@ import cors from "cors";
 import morgan from "morgan";
 
 import { QueryPayload } from "@dqa/shared-data";
-
-import healthCheckRoute from "./modules/healthCheck/hc.routes";
 import logger from "./globals/utils/logger";
+import { API_VERSION_ROUTE } from "./config/project.config";
+
+// Routers Import
+import healthCheckRoute from "./modules/healthCheck/hc.routes";
+import authRoute from "./modules/authentication/auth.routes"
 
 const app = express();
 const morganFormat = ":method :url :status :response-time ms";
@@ -32,18 +35,12 @@ app.use(
   })
 );
 
-app.use("/api/v1/healthcheck", healthCheckRoute);
+app.use(`${API_VERSION_ROUTE}/healthcheck`, healthCheckRoute);
+app.use(`${API_VERSION_ROUTE}/auth`, authRoute);
 
 app.get("/", (req, res) => {
   const responseData: QueryPayload = {
     payload: "Backend is online ☕",
-  };
-
-  res.json(responseData);
-});
-app.get("/data", (req, res) => {
-  const responseData: QueryPayload = {
-    payload: "Server returned data successfully!",
   };
 
   res.json(responseData);

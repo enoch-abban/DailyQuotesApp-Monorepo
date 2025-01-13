@@ -4,6 +4,7 @@ import { app } from "./src/app";
 import DbConfig from "./src/database";
 import { DB_NAME } from "./src/config/db_config";
 import { ErrorResponse } from "@dqa/shared-data";
+import logger from "./src/globals/utils/logger";
 
 dotenv.config({
   path: "./.env.local"
@@ -30,22 +31,30 @@ DbConfig.connectToDb(`${process.env.MONGOURL}/${DB_NAME}`).then(
     });
   }
 ).catch((err) => {
-  console.error("MongoDB Error:\n------\n", err);
+  logger.error("MongoDB Error:", err);
   process.exit(1);
 })
 
 
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at  Robo-Centre:', promise, 'reason:', reason);
 
   if (reason instanceof Error) {
-      console.error('Unhandled Rejection @ DailyQuotes', reason);
+      logger.error("Unhandled Rejection @ DailyQuotes", reason)
   } else {
-     console.error('Unhandled Rejection @ DailyQuotes', new Error(`Unhandled Rejection: ${reason}`));
+     logger.error('Unhandled Rejection @ DailyQuotes', new Error(`Unhandled Rejection: ${reason}`));
   }
 });
 
+process.stdin.resume(); // so the program will not close instantly
+
 // Catch uncaught exceptions
 process.on('uncaughtException', (error) => {
-  console.error(`Uncaught Exception @ DailyQuotes: ${error}`);
+  logger.error(`Uncaught Exception @ DailyQuotes: ${error}`);
+});
+
+process.on("beforeExit", async (code) => {
+  if (app.locals.dbClient) {
+    await app.locals.dbClient.close();
+  }
+  logger.error("Exiting process DQA with error code:", code);
 });

@@ -1,42 +1,62 @@
-import { Request, Response } from "express";
+import { ApiResponse } from "@dqa/shared-data";
+import { asyncHandler } from "../../globals/utils/asyncHandler";
 
 
 const authController = (function() {
 
-    const emailLogin = async (req: Request, res: Response) => {
+    const createAccount = asyncHandler( (req, res) => {
+        // get the data from the request body
 
-    }
+        // check user existence from the db
 
-    const verifyAccount = async (req: Request, res: Response) => {
+        // return error response if existence is true
 
-    }
+        // hash the password
 
-    const resetPassword = async (req: Request, res: Response) => {
+        // add created at and updated at
 
-    }
+        // add user to db if existence is false
 
-    const forgetPassword = async (req: Request, res: Response) => {
+        // return the response
+        return res
+            .status(200)
+            .json({
+                data: {},
+                message: "Account created successfully!"
+            } as ApiResponse<{}>);
+    });
+    
+    const emailLogin = asyncHandler ((req, res) => {
 
-    }
+    });
 
-    const createAccount = async (req: Request, res: Response) => {
+    const verifyAccount = asyncHandler ((req, res) => {
 
-    }
+    });
 
-    const updateAccount = async (req: Request, res: Response) => {
+    const resetPassword = asyncHandler ((req, res) => {
 
-    }
+    });
 
-    const getCurrentUserProfile = async (req: Request, res: Response) => {
+    const forgetPassword = asyncHandler ((req, res) => {
 
-    }
+    });
+
+
+    const updateAccount = asyncHandler ((req, res) => {
+
+    });
+
+    const getCurrentUserProfile = asyncHandler ((req, res) => {
+
+    });
 
     return {
+        createAccount,
         emailLogin,
         verifyAccount,
         resetPassword,
         forgetPassword,
-        createAccount,
         updateAccount,
         getCurrentUserProfile
     }
