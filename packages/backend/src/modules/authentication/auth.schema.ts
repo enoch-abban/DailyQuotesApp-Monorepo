@@ -13,6 +13,7 @@ const authSchema = (function(){
 
     const verifyAccountSchema = object ({
         body: object({
+            userId: string().min(24).max(24),
             token: string()
         })
     })

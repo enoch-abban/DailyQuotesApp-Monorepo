@@ -1,4 +1,8 @@
 import dotenv from "dotenv";
+dotenv.config({
+  path: "./.env.local"
+})
+
 import { createServer } from "node:http";
 import { app } from "./src/app";
 import DbConfig from "./src/database";
@@ -6,9 +10,6 @@ import { DB_NAME } from "./src/config/db_config";
 import { ErrorResponse } from "@dqa/shared-data";
 import logger from "./src/globals/utils/logger";
 
-dotenv.config({
-  path: "./.env.local"
-})
 
 const port = process.env.PORT || 3001;
 

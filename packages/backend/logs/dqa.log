@@ -24,3 +24,8 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/signup\",\"status\":\"400\",\"responseTime\":\"4.962\"}","timestamp":"2025-01-13T00:22:07.548Z"}
 {"level":"\u001b[31merror\u001b[39m","message":"{\"schemaVoilations\":[{\"validation\":\"email\",\"code\":\"invalid_string\",\"message\":\"Invalid email address\",\"path\":[\"body\",\"email\"]}]}","timestamp":"2025-01-13T00:23:02.044Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/signup\",\"status\":\"400\",\"responseTime\":\"2.159\"}","timestamp":"2025-01-13T00:23:02.046Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"{\"schemaVoilations\":[{\"validation\":\"email\",\"code\":\"invalid_string\",\"message\":\"Invalid email address\",\"path\":[\"body\",\"email\"]}]}","timestamp":"2025-01-13T10:45:59.422Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/signup\",\"status\":\"400\",\"responseTime\":\"14.411\"}","timestamp":"2025-01-13T10:45:59.447Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"{\"schemaVoilations\":[{\"received\":\"O\",\"code\":\"invalid_enum_value\",\"options\":[\"M\",\"F\"],\"path\":[\"body\",\"gender\"],\"message\":\"Invalid enum value. Expected 'M' | 'F', received 'O'\"}]}","timestamp":"2025-01-13T10:46:12.049Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/signup\",\"status\":\"400\",\"responseTime\":\"2.608\"}","timestamp":"2025-01-13T10:46:12.051Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/signup\",\"status\":\"404\",\"responseTime\":\"1.082\"}","timestamp":"2025-01-13T10:46:27.368Z"}

@@ -1,5 +1,6 @@
 
 import * as bcrypt from 'bcryptjs';
+import { MIN_OPT_LENGTH, OPT_LENGTH } from '../../config/project.config';
 
 const authenticationUtils = (function () {
     const encryptPassword = (password: string) => {
@@ -7,9 +8,9 @@ const authenticationUtils = (function () {
             bcrypt.genSalt(10).then((salt)=>{
                 return bcrypt.hash(password, salt);
             }).then((hashpassword)=>{
-                return resolve(hashpassword)
+                return resolve(hashpassword);
             }).catch((err)=>{
-                return reject(err)
+                return reject(err);
             })
         });
     };
@@ -26,9 +27,24 @@ const authenticationUtils = (function () {
         })
     }
 
+    const generateOTP = () => {
+        return new Promise(function(resolve, reject){
+            if (OPT_LENGTH < MIN_OPT_LENGTH) {
+                reject({error: `OTP length must be > ${MIN_OPT_LENGTH}`});
+            }
+            const mult_by = Number("9" + "0".repeat(OPT_LENGTH-1));
+            const add_by = Number("1" + "0".repeat(OPT_LENGTH-1))
+            const otp = `${Math.floor(add_by + Math.random() * mult_by)}`;
+
+            resolve(otp);
+
+        })
+    }
+
     return {
         encryptPassword,
-        decryptpassword
+        decryptpassword,
+        generateOTP
     };
   })();
 
