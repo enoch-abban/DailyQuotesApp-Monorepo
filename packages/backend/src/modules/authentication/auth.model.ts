@@ -15,4 +15,4 @@ export interface SendMessageNotificationI {
 
 export type VerifyAccountModel = TypeOf<
   typeof authSchema.verifyAccountSchema
->["body"] & { createdAt?: string; expiresAt?: number };
+>["body"] & { createdAt?: string; expiresAt: number };
