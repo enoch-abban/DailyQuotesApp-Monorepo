@@ -10,4 +10,13 @@ const asyncHandler = (requestHandler: (arg0: Request<ParamsDictionary, any, any,
     }
 };
 
-export {asyncHandler};
+// credits to: https://stackoverflow.com/a/53689892
+const to = async (promise: Promise<any>) => {
+    return promise.then(data => {
+        return {error: null, result: data};
+    }).catch(err => {
+        return {error: err, result: null};
+    });
+}
+
+export {asyncHandler, to};

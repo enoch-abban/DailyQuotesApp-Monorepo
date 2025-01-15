@@ -50,7 +50,7 @@ export const validateSchema = (schema: AnyZodObject) =>
     }
 
     JWTUtils.verifyJWT(auth_header![1]).then((decoded) => {
-        console.log("[Decoded JWT]", decoded);
+        // console.log("[Decoded JWT]", decoded);
         req.app.locals["jwt"] = decoded;
         next();
     }).catch((error) => {

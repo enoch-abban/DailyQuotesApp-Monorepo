@@ -39,9 +39,9 @@ const userSchema = (function () {
             middleName: string().optional(),  // Optional field
         }),
         
-        params: object({
-            id: string({}).min(24).max(24)
-          })
+        // params: object({
+        //     id: string({}).min(24).max(24)
+        //   })
     });
 
     return {

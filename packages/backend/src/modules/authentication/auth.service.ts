@@ -22,7 +22,7 @@ const authService = (function () {
     }
   };
 
-  const updateAccount = async (id: string, data: UpdateUserModel) => {
+  const updateAccount = async (id: string, data: UpdateUserModel & {password?: string}) => {
     try {
       const database = DbConfig.getDb();
       if (!database) {
@@ -37,6 +37,7 @@ const authService = (function () {
         .findOne({ _id: obj_id });
       return account;
     } catch (error) {
+      logger.error(JSON.stringify(error as ErrorResponse));
       return null;
     }
   };
@@ -54,7 +55,7 @@ const authService = (function () {
         .findOne(filter);
       return account;
     } catch (error) {
-      logger.error(JSON.stringify(error as ErrorResponse));
+      logger.error(JSON.stringify(error));
       return null;
     }
   };
@@ -75,6 +76,7 @@ const authService = (function () {
       }
       return null;
     } catch (error) {
+      logger.error(JSON.stringify(error as ErrorResponse));
       return null;
     }
   };
@@ -98,7 +100,7 @@ const authService = (function () {
   };
 
   const getAccountVerificationInfoByFilter = async (filter: {}) => {
-    const sort = { updatedAt: -1 }; //descending order (most recent first)
+    const sort = { createdAt: -1 }; //descending order (most recent first)
     const limit = 1;
     const skip = 0;
 
@@ -111,8 +113,6 @@ const authService = (function () {
         .collection(COLLECTIONS.USER_OTP)
         .aggregate(genericAggregation(filter, sort, limit, skip))
         .toArray(); // in the form [ { data: [ [Object] ], totalCount: number } ]
-    
-        console.log("[AuthService] VeriInfo:", veri_infos);
 
       return veri_infos[0].data[0];
     } catch (error) {
