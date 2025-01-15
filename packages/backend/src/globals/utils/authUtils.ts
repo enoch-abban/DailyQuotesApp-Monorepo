@@ -8,9 +8,9 @@ const authenticationUtils = (function () {
             bcrypt.genSalt(10).then((salt)=>{
                 return bcrypt.hash(password, salt);
             }).then((hashpassword)=>{
-                return resolve(hashpassword);
+                resolve(hashpassword);
             }).catch((err)=>{
-                return reject(err);
+                reject(err);
             })
         });
     };
@@ -18,10 +18,10 @@ const authenticationUtils = (function () {
     const decryptpassword = (hash: string, password: string)=>{
         return new Promise(function (resolve, reject){
             bcrypt.compare(password, hash).then((res)=>{
-                return resolve(res)
+                resolve(res)
             }).catch((err)=>{
                 console.log(err);
-                return reject({'error':'error occurred whilst processing password',
+                reject({'error':'error occurred whilst processing password',
             })
             })
         })

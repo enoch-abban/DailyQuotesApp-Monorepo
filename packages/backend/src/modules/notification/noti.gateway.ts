@@ -7,16 +7,6 @@ import { Options } from "nodemailer/lib/mailer";
 
 const notificationGateway = (function(){
 
-    // const gmailOAuthTokens = {
-    //     "client_id": "1079043352031-rinuub9sa8899rlgh2fuem7dnpkvk5vj.apps.googleusercontent.com",
-    //     "client_secret": "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",
-    //     "access_token": "ya29.a0ARW5m74yTW-UirjqVHTSGMV9N73x7R3t9nBGosmr5KD4jhA4mLpJmBhzNo1KjboOTG2QTStnMnkaACCSPhHKsEr9EErrX1u8gX4ocXVB-Uw8kLFf-yIWsF3scDUSYHgFuKhsyRX9iMHc7h0SQlJJgWnl6Nf6mQkRmUoRd7PGaCgYKAS4SARASFQHGX2Mi_VDsD_fKN33URpeLyh3sXg0175", 
-    //     "scope": "https://mail.google.com/", 
-    //     "token_type": "Bearer", 
-    //     "expires_in": 3599, 
-    //     "refresh_token": "1//046ANhF0klD49CgYIARAAGAQSNwF-L9IraL9rFkC-zj0YaE1dsZehYSjuxFG6-rGqRUluzDZ51wfu6h9F7WoJGo2atV6NkxzbvKI"
-    //   }
-
     // Less secure
     let gmailTransporter = createTransport({
         service: "gmail",

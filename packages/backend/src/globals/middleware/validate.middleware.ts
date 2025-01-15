@@ -31,19 +31,19 @@ export const validateSchema = (schema: AnyZodObject) =>
   export const validateToken = asyncHandler(async (req, res, next) => {
     const auth_header = req.headers.authorization?.split(" ");
     if (auth_header === undefined) {
-        res.status(401).json({
+        return res.status(401).json({
             data: null,
             message: "No Token provided☕!"
         } as ApiResponse<null>);
     }
-    if (!auth_header![0].startsWith("Toke") || !auth_header![0].startsWith("Bear")) {
-        res.status(401).json({
+    if (!(auth_header![0].startsWith("Toke")) && !(auth_header![0].startsWith("Bear"))) {
+        return res.status(401).json({
             data: null,
-            message: `Invalid Token format "${auth_header![0]}"`
+            message: "Invalid Token format☕!"
         } as ApiResponse<null>);
     }
-    if (auth_header!.length === 1 || auth_header![1] === "") {
-        res.status(401).json({
+    if (auth_header!.length === 1 || auth_header![1].length < 1) {
+        return res.status(401).json({
             data: null,
             message: `Invalid Token format "${auth_header!}"`
         } as ApiResponse<null>);
@@ -55,9 +55,9 @@ export const validateSchema = (schema: AnyZodObject) =>
         next();
     }).catch((error) => {
         logger.error("[verifyJWT]", error);
-        res.status(401).json({
+        return res.status(401).json({
             data: null,
-            message: "Unauthorized Token passed☕!"
+            message: "Invalid Token passed☕!"
         } as ApiResponse<null>);
     });
   });

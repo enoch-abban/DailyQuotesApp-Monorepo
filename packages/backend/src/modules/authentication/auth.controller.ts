@@ -20,7 +20,7 @@ const authController = (function () {
     // return error response if existence is true
     if (found_user) {
       return res
-        .status(404)
+        .status(403)
         .json({
           data: null,
           message: `User with email "${data.email}" or phone "${data.phone}" already exists`,
@@ -32,7 +32,7 @@ const authController = (function () {
 
     // add created at and updated at
     data.createdAt = new Date().toISOString();
-    data.updatedAt = data.createdAt;
+    data.updatedAt = new Date().toISOString();
     data.password = password_hash;
     data.verified = false;
 
@@ -82,9 +82,9 @@ const authController = (function () {
 
     // return the response
     return res.status(200).json({
-      data: saved_otp,
+      data: {userId: saved_account.insertedId.toString()},
       message: "Account created successfully!",
-    } as ApiResponse<VerifyAccountModel>);
+    } as ApiResponse<{userId: string}>);
   });
 
 
@@ -140,7 +140,7 @@ const authController = (function () {
     const data = req.body as {userId: string, token: string};
 
     // check if userId is valid
-    const account = await authService.getAccountByFilter({_id: new ObjectId(data.userId)});
+    const account = await authService.getAccountByFilter({_id: new ObjectId(data.userId)}) as WithId<CreateUserModel>;
     if (!account) {
         logger.info(`[VerifyAccount] User with _id: ${data.userId} not found in DB`);
         return res
@@ -148,6 +148,16 @@ const authController = (function () {
         .json({
           data: null,
           message: "User doesn't exist",
+        } as ErrorResponse);
+    }
+
+    if (account.verified) {
+        logger.info(`[VerifyAccount] User with _id: ${data.userId} attempted to re-verify`);
+        return res
+        .status(403)
+        .json({
+          data: null,
+          message: "This account has already been verified. Just sign in, cheers🍻",
         } as ErrorResponse);
     }
 
@@ -224,7 +234,7 @@ const authController = (function () {
     }
     return res.status(200).json({
         data: account,
-        message: "Account verified successfully!",
+        message: "Account retrieved successfully!",
       } as ApiResponse<{}>); 
   });
 

@@ -110,9 +110,11 @@ const authService = (function () {
       const veri_infos = await database
         .collection(COLLECTIONS.USER_OTP)
         .aggregate(genericAggregation(filter, sort, limit, skip))
-        .toArray();
+        .toArray(); // in the form [ { data: [ [Object] ], totalCount: number } ]
+    
+        console.log("[AuthService] VeriInfo:", veri_infos);
 
-      return veri_infos[0];
+      return veri_infos[0].data[0];
     } catch (error) {
       return null;
     }
