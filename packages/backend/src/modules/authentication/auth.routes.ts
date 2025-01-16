@@ -38,7 +38,6 @@ router.post(
     validateSchema(authSchema.resetPasswordSchema),
     authController.resetPassword);
 
-// Buggy - Fix multiple JWT token access
 router.get(
     "/account/profile",
     validateToken,

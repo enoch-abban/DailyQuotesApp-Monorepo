@@ -14,6 +14,14 @@ const JWTUtils = (function () {
     };
   };
 
+  const createJWTWithExpiry = (data: {}, expiry_date: string | number) => {
+    // const generateduserid = generator.userid(24);
+    const token = JWT.sign({ ...data }, process.env.TOKEN as string, { expiresIn: expiry_date });
+    return {
+      token: token,
+    };
+  };
+
   const signInCreate = (userid: string) => {
     const token = JWT.sign({ _id: userid }, process.env.TOKEN as string);
     return {
@@ -50,6 +58,7 @@ const JWTUtils = (function () {
 
   return {
     createJWT,
+    createJWTWithExpiry,
     signInCreate,
     forgetPasswordCreate,
     verifyJWT
