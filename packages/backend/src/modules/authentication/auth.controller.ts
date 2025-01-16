@@ -229,7 +229,7 @@ const authController = (function () {
     return res.status(200).json({
       data: { userId: account._id.toString() },
       message:
-        "OTP has been sent to your email! Get the code and enter it in the verification page🍻!",
+        "OTP has been sent to your email! Get the code (from your inbox or spam) and enter it in the verification page🍻!",
     } as ApiResponse<{ userId: string }>);
   });
 
@@ -281,11 +281,20 @@ const authController = (function () {
     }
 
     // compare otp hashes
-    const otp_valid = authenticationUtils.decryptpassword(
+    const otp_valid = await to(authenticationUtils.decryptpassword(
       veri_info.token,
       data.token
-    );
-    if (!otp_valid) {
+    ));
+    if(otp_valid.error) {
+        logger.error("[verifyAccount]", otp_valid.error);
+      return res
+        .status(503) //service unavailable
+        .json({
+          data: null,
+          message: "Something unexpected happened. Try again in a while ☕",
+        } as ErrorResponse);
+    }
+    if (!otp_valid.result) {
       return res.status(400).json({
         data: null,
         message: "OTP is invalid. Check your email and try again☕",

@@ -12,8 +12,7 @@ router.post(
     "/signup", 
     validateSchema(userSchema.createUser),
     authController.createAccount);
-    
-//TODO: Buggy - Fix
+
 router.post(
     "/verify",
     validateSchema(authSchema.verifyAccountSchema),
@@ -39,6 +38,7 @@ router.post(
     validateSchema(authSchema.resetPasswordSchema),
     authController.resetPassword);
 
+// Buggy - Fix multiple JWT token access
 router.get(
     "/account/profile",
     validateToken,
