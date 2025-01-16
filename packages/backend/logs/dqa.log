@@ -75,3 +75,10 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/verify\",\"status\":\"200\",\"responseTime\":\"1717.175\"}","timestamp":"2025-01-15T17:53:12.659Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"[VerifyAccount] User with _id: 67878eedadbade3f3606887e attempted to re-verify","timestamp":"2025-01-15T17:53:33.616Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/verify\",\"status\":\"403\",\"responseTime\":\"158.601\"}","timestamp":"2025-01-15T17:53:33.618Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"[VerifyAccount] User with _id: 67878eedadbade3f3606887e attempted to re-verify","timestamp":"2025-01-16T12:23:22.100Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/verify\",\"status\":\"403\",\"responseTime\":\"188.373\"}","timestamp":"2025-01-16T12:23:22.134Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/resetpassword\",\"status\":\"200\",\"responseTime\":\"700.270\"}","timestamp":"2025-01-16T12:24:26.275Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/signin\",\"status\":\"200\",\"responseTime\":\"369.612\"}","timestamp":"2025-01-16T12:27:31.882Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/signin\",\"status\":\"200\",\"responseTime\":\"307.950\"}","timestamp":"2025-01-16T12:27:43.058Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/signin\",\"status\":\"200\",\"responseTime\":\"1429.295\"}","timestamp":"2025-01-16T12:27:56.645Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/auth/signin\",\"status\":\"200\",\"responseTime\":\"302.209\"}","timestamp":"2025-01-16T12:35:21.819Z"}

@@ -155,11 +155,20 @@ const authController = (function () {
     }
 
     // check password
-    const valid_password = authenticationUtils.decryptpassword(
+    const valid_password = await to(authenticationUtils.decryptpassword(
       account.password,
       data.password
-    );
-    if (!valid_password) {
+    ));
+    if(valid_password.error) {
+        logger.error("[signIn]", valid_password.error);
+      return res
+        .status(503) //service unavailable
+        .json({
+          data: null,
+          message: "Something unexpected happened. Try again in a while ☕",
+        } as ErrorResponse);
+    }
+    if (!valid_password.result) {
       return res.status(400).json({
         data: null,
         message: "Password is invalid🌚",

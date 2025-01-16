@@ -42,8 +42,6 @@ const authService = (function () {
     }
   };
 
-  const resetPassword = async (id: string, password: string) => {};
-
   const getAccountByFilter = async (filter: {}) => {
     try {
       const database = DbConfig.getDb();
@@ -123,7 +121,6 @@ const authService = (function () {
   return {
     saveAccount,
     updateAccount,
-    resetPassword,
     getAccountByFilter,
     getAllAccountsByFilter,
     saveAccountVerificationInfo,
