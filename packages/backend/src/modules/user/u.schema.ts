@@ -1,8 +1,9 @@
 import {string, object, enum as zodEnum} from "zod"
+import { USER_ROLES } from "../../config/db_config";
 
 const userSchema = (function () {
 
-    const Roles = zodEnum(["admin", "user"]);
+    const Roles = zodEnum(USER_ROLES);
     const Genders = zodEnum(["M", "F"]);
 
     const phoneSchema = string().refine((val) => {

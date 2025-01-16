@@ -118,6 +118,15 @@ const authService = (function () {
     }
   };
 
+  const getAllAccounts = async (filter: {}, sort: {}, limit: number, skip: number) => {
+    const database = DbConfig.getDb();
+    if (!database) return null;
+
+    const all_accounts = await database.collection(COLLECTIONS.USERS).aggregate(genericAggregation(filter, sort, limit, skip)).toArray();
+
+    return all_accounts[0].data;
+  }
+
   return {
     saveAccount,
     updateAccount,
@@ -125,7 +134,8 @@ const authService = (function () {
     getAllAccountsByFilter,
     saveAccountVerificationInfo,
     getAccountVerificationInfoByFilter,
-    getAccountByFilterAggregation
+    getAccountByFilterAggregation,
+    getAllAccounts
   };
 })();
 

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import authController from "./auth.controller";
-import { validateSchema, validateToken } from "../../globals/middleware/validate.middleware";
+import { validatePermission, validateSchema, validateToken } from "../../globals/middleware/validate.middleware";
 import userSchema from "../user/u.schema";
 import authSchema from "./auth.schema";
 
@@ -49,6 +49,11 @@ router.patch(
     validateToken,
     authController.updateAccount);
 
+router.get(
+    "/account/profile/all",
+    validateToken,
+    validatePermission(["admin"]),
+    authController.getAllUserAccounts);
 
 
 export default router;

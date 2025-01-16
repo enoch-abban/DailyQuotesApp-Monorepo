@@ -61,3 +61,18 @@ export const validateSchema = (schema: AnyZodObject) =>
         } as ApiResponse<null>);
     });
   });
+
+export const validatePermission = (allowed_roles: string[]) => 
+    (req: Request, res: Response, next: NextFunction) => {
+        const {role} = req.app.locals.jwt;
+
+        if (!allowed_roles.includes(role)) {
+            res.status(403).json({
+                data: null,
+                message: "Unauthorized☕!"
+            } as ApiResponse<null>);
+        }
+        else {
+            next();
+        }
+    }

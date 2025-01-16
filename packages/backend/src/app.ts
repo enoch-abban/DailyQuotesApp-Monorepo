@@ -9,6 +9,7 @@ import { API_VERSION_ROUTE } from "./config/project.config";
 // Routers Import
 import healthCheckRoute from "./modules/healthCheck/hc.routes";
 import authRoute from "./modules/authentication/auth.routes"
+import { parseMongoFilter } from "./globals/middleware/parseMongoFilter.middleware";
 
 const app = express();
 const morganFormat = ":method :url :status :response-time ms";
@@ -34,6 +35,7 @@ app.use(
     },
   })
 );
+app.use(parseMongoFilter);
 
 app.use(`${API_VERSION_ROUTE}/healthcheck`, healthCheckRoute);
 app.use(`${API_VERSION_ROUTE}/auth`, authRoute);

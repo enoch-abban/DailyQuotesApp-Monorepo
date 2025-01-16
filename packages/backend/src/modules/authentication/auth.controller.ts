@@ -497,6 +497,11 @@ const authController = (function () {
     } as ApiResponse<{}>);
   });
 
+  //TODO
+  const getAllUserAccounts = asyncHandler(async(req, res) => {
+
+  });
+
   return {
     createAccount,
     signin,
@@ -506,6 +511,7 @@ const authController = (function () {
     forgetPassword,
     updateAccount,
     getCurrentUserProfile,
+    getAllUserAccounts
   };
 })();
 
