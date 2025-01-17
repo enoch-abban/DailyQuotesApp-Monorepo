@@ -19,4 +19,8 @@ const to = async (promise: Promise<any>) => {
     });
 }
 
-export {asyncHandler, to};
+const isEmptyObject = (obj: object): boolean => {
+    return Object.keys(obj).length === 0;
+  }
+
+export {asyncHandler, to, isEmptyObject};

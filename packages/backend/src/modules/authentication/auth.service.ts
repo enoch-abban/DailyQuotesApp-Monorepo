@@ -2,7 +2,7 @@ import { ErrorResponse } from "@dqa/shared-data";
 import { COLLECTIONS } from "../../config/db_config";
 import DbConfig from "../../database";
 import logger from "../../globals/utils/logger";
-import { CreateUserModel, getUserAccountAggregation, UpdateUserModel } from "../user/u.model";
+import { CreateUserModel, getAllUserAccountsAggregation, getUserAccountAggregation, UpdateUserModel } from "../user/u.model";
 import { VerifyAccountModel } from "./auth.model";
 import { genericAggregation } from "../../globals/global.types";
 import { ObjectId } from "mongodb";
@@ -32,10 +32,16 @@ const authService = (function () {
       await database
         .collection(COLLECTIONS.USERS)
         .updateOne({ _id: obj_id }, { $set: data });
-      const account = await database
+
+        const accounts = await database
         .collection(COLLECTIONS.USERS)
-        .findOne({ _id: obj_id });
-      return account;
+        .aggregate(getUserAccountAggregation({ _id: obj_id }))
+        .toArray();
+
+      if (accounts.length > 0) {
+        return accounts[0];
+      }
+      return null;
     } catch (error) {
       logger.error(JSON.stringify(error as ErrorResponse));
       return null;
@@ -79,8 +85,6 @@ const authService = (function () {
     }
   };
 
-  const getAllAccountsByFilter = async (filter: {}) => {};
-
   const saveAccountVerificationInfo = async (data: VerifyAccountModel) => {
     try {
       const database = DbConfig.getDb();
@@ -122,7 +126,7 @@ const authService = (function () {
     const database = DbConfig.getDb();
     if (!database) return null;
 
-    const all_accounts = await database.collection(COLLECTIONS.USERS).aggregate(genericAggregation(filter, sort, limit, skip)).toArray();
+    const all_accounts = await database.collection(COLLECTIONS.USERS).aggregate(getAllUserAccountsAggregation(filter, sort, limit, skip)).toArray();
 
     return all_accounts[0].data;
   }
@@ -131,7 +135,6 @@ const authService = (function () {
     saveAccount,
     updateAccount,
     getAccountByFilter,
-    getAllAccountsByFilter,
     saveAccountVerificationInfo,
     getAccountVerificationInfoByFilter,
     getAccountByFilterAggregation,

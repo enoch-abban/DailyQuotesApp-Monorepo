@@ -2,31 +2,6 @@ import { ObjectId } from "mongodb";
 
 const filterHelper = (function () {
 
-  const transformID = (input: any): any => {
-
-    if (Array.isArray(input)) {
-      return input.map(item => transformID(item));
-    }
-
-    if (input instanceof ObjectId) {
-      return input;
-    }
-
-    const transformedObject: any = {};
-
-    for (const key in input) {
-      if (typeof input[key] === 'object' && '$toObjectId' in input[key]) {
-        transformedObject[key] = new ObjectId(`${input[key]['$toObjectId']}`);
-      } else if (typeof input[key] === 'object') {
-        transformedObject[key] = transformID(input[key]);
-      } else {
-        transformedObject[key] = input[key];
-      }
-    }
-
-    return transformedObject;
-  }
-
   const objectIdConverter = (input: any): Record<string, any> => {
     if (Array.isArray(input)) {
       return input.map((item) => objectIdConverter(item));
@@ -43,7 +18,7 @@ const filterHelper = (function () {
       if (input[key] == null) {
         transformObject[key] = null
       } else if (input[key] != null && typeof input[key] === 'object' && '$$_id' in input[key]) {
-        transformObject[key] = new ObjectId(input[key]['$$_id']);
+        transformObject[key] = new ObjectId(input[key]['$$_id'] as string);
       } else if (typeof input[key] === 'object') {
         transformObject[key] = objectIdConverter(input[key])
       } else {
@@ -83,7 +58,7 @@ const filterHelper = (function () {
           transformedObject[key] = null;
         } else if (typeof value === 'object' && value !== null && '$$_id' in value) {
           // Convert objects with a `$$_id` field to ObjectId
-          transformedObject[key] = new ObjectId(value['$$_id']);
+          transformedObject[key] = new ObjectId(value['$$_id'] as string);
         } else if (typeof value === 'object') {
           // Recursively process nested objects
           transformedObject[key] = processQueryFilterToMongo(value);
@@ -99,7 +74,6 @@ const filterHelper = (function () {
   
 
   return {
-    transformID,
     objectIdConverter,
     processQueryFilterToMongo
   }

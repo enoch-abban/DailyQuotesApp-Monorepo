@@ -17,3 +17,48 @@ export const getUserAccountAggregation = (filter: {}) => {
         },
     ]
 }
+
+export const getAllUserAccountsAggregation = (
+    filter: {},
+    sort: {},
+    limit: number,
+    skip: number
+) => {
+    return [
+        {
+            $match: filter,
+        },
+        {
+            $unset: ["password", "verified", "role"]
+        },
+        {
+            $facet: {
+                "totalCount": [
+                    {
+                        $count: "count"
+                    }
+                ],
+                "data": [
+                    {
+                        $sort: sort,
+                    },
+                    {
+                        $skip: skip,
+                    },
+                    {
+                        $limit: limit,
+                    }
+                ]
+            }
+        },
+        {
+            $unwind: "$totalCount"
+        },
+        {
+            $project: {
+                "data": 1,
+                "totalCount": "$totalCount.count",
+            }
+        }
+    ]
+}

@@ -127,7 +127,7 @@ const authController = (function () {
     // return the response
     return res.status(200).json({
       data: { userId: saved_account.insertedId.toString() },
-      message: "Account created successfully!",
+      message: "Account created successfully! Verify your account with OTP sent via email🍻!",
     } as ApiResponse<{ userId: string }>);
   });
 
@@ -497,8 +497,17 @@ const authController = (function () {
     } as ApiResponse<{}>);
   });
 
-  //TODO
+  //
   const getAllUserAccounts = asyncHandler(async(req, res) => {
+    const { filter, sort, limit, skip } = req.query;
+
+    const accounts = await authService.getAllAccounts(
+      filter as {}, sort as {}, Number(limit), Number(skip)) as CreateUserModel[];
+
+      return res.status(200).json({
+        data: accounts,
+        message: "Account retrieved successfully!",
+      } as ApiResponse<CreateUserModel[]>);
 
   });
 
