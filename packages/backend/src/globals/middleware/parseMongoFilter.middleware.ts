@@ -48,7 +48,7 @@ export const parseMongoFilter = asyncHandler((req, res, next) => {
         }
     } else {req.query.sort = JSON.parse('{ "updatedAt": -1 }');}
 
-    if (Number.isNaN(Number(req.query.limit))) {
+    if (req.query.limit && Number.isNaN(Number(req.query.limit))) {
         logger.error("[parseMongoFilter] attempted invalid argument to $limit stage: found NaN", req.query.limit);
             return res.status(400).json({
                 data: null,
@@ -57,7 +57,7 @@ export const parseMongoFilter = asyncHandler((req, res, next) => {
     }
     req.query.limit = req.query.limit ?? "20";
 
-    if (Number.isNaN(Number(req.query.skip))) {
+    if (req.query.skip && Number.isNaN(Number(req.query.skip))) {
         logger.error("[parseMongoFilter] attempted invalid argument to $skip stage: found NaN", req.query.skip);
             return res.status(400).json({
                 data: null,
