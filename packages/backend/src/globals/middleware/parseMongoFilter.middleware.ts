@@ -66,11 +66,11 @@ export const parseMongoFilter = asyncHandler((req, res, next) => {
     }
     req.query.skip = req.query.skip ?? "0";
 
-    console.log("After Parsing>>>>\n--------");
-    console.log("Query Filter:", req.query.filter);
-    console.log("Query Sort:", req.query.sort);
-    console.log("Query Limit:", req.query.limit, ", Type:", typeof req.query.limit);
-    console.log("Query Skip:", req.query.skip, ", Type:", typeof req.query.skip);
+    // console.log("After Parsing>>>>\n--------");
+    // console.log("Query Filter:", req.query.filter);
+    // console.log("Query Sort:", req.query.sort);
+    // console.log("Query Limit:", req.query.limit, ", Type:", typeof req.query.limit);
+    // console.log("Query Skip:", req.query.skip, ", Type:", typeof req.query.skip);
 
     next();
 })

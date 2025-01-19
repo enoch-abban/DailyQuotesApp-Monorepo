@@ -28,7 +28,7 @@ DbConfig.connectToDb(`${process.env.MONGOURL}/${DB_NAME}`).then(
 
     // Start the server in listening mode
     httpServer.listen(port, () => {
-      console.log(`Example app listening at http://localhost:${port}`);
+      logger.info(`Example app listening at http://localhost:${port}`);
     });
   }
 ).catch((err) => {
@@ -39,18 +39,15 @@ DbConfig.connectToDb(`${process.env.MONGOURL}/${DB_NAME}`).then(
 
 process.on('unhandledRejection', (reason, promise) => {
 
-  if (reason instanceof Error) {
-      logger.error("Unhandled Rejection @ DailyQuotes", reason)
-  } else {
-     logger.error('Unhandled Rejection @ DailyQuotes', new Error(`Unhandled Rejection: ${reason}`));
-  }
+  logger.error("Unhandled Rejection @ DailyQuotes", reason);
+
 });
 
 process.stdin.resume(); // so the program will not close instantly
 
 // Catch uncaught exceptions
 process.on('uncaughtException', (error) => {
-  logger.error(`Uncaught Exception @ DailyQuotes: ${error}`);
+  logger.error("Uncaught Exception @ DailyQuotes:", error);
 });
 
 process.on("beforeExit", async (code) => {

@@ -2,14 +2,15 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 
-import { QueryPayload } from "@dqa/shared-data";
+import { ApiResponse, QueryPayload } from "@dqa/shared-data";
 import logger from "./globals/utils/logger";
 import { API_VERSION_ROUTE } from "./config/project.config";
+import { parseMongoFilter } from "./globals/middleware/parseMongoFilter.middleware";
 
 // Routers Import
 import healthCheckRoute from "./modules/healthCheck/hc.routes";
 import authRoute from "./modules/authentication/auth.routes"
-import { parseMongoFilter } from "./globals/middleware/parseMongoFilter.middleware";
+import quotesroute from "./modules/features/quotes/q.routes"
 
 const app = express();
 const morganFormat = ":method :url :status :response-time ms";
@@ -39,13 +40,13 @@ app.use(parseMongoFilter);
 
 app.use(`${API_VERSION_ROUTE}/healthcheck`, healthCheckRoute);
 app.use(`${API_VERSION_ROUTE}/auth`, authRoute);
+app.use(`${API_VERSION_ROUTE}/quote`, quotesroute);
 
 app.get("/", (req, res) => {
-  const responseData: QueryPayload = {
-    payload: "Backend is online ☕",
-  };
-
-  res.json(responseData);
+  res.status(200).json({
+    data: null,
+    message: "Backend is online ☕",
+  } as ApiResponse<null>);
 });
 
 export { app };
