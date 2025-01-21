@@ -6,9 +6,7 @@ const quoteSchema = (function() {
     const createQuote = object({
         body: object({
             content: string().min(3).max(500),
-            media: string().url({message: "Invalid media url"}).optional(),
-            // reactionIds: string().min(24).max(24).array().optional(),
-            // reflectionIds: string().min(24).max(24).array().optional()
+            media: string().url({message: "Invalid media url"}).optional()
         })
     });
 

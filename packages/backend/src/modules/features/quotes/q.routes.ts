@@ -2,6 +2,7 @@ import { Router } from "express";
 import quoteController from "./q.controller";
 import { validatePermission, validateSchema, validateToken } from "../../../globals/middleware/validate.middleware";
 import quoteSchema from "./q.schema";
+import globalSchema from "../../../globals/global.schema";
 
 const router = Router();
 
@@ -12,11 +13,13 @@ router.post("/",
 
 router.patch("/:id", 
     validateToken,
+    validateSchema(globalSchema.getByIdSchema),
     validateSchema(quoteSchema.updateQuote),
     quoteController.updateQuote);
 
 router.get("/one/:id", 
     validateToken,
+    validateSchema(globalSchema.getByIdSchema),
     quoteController.getUserQuote);
 
 router.get("/all", 

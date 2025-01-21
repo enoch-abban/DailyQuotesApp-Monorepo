@@ -172,3 +172,12 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/auth/account/profile/all\",\"status\":\"403\",\"responseTime\":\"5.469\"}","timestamp":"2025-01-17T16:20:38.845Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/auth/account/profile/all\",\"status\":\"200\",\"responseTime\":\"160.808\"}","timestamp":"2025-01-17T16:21:21.792Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/\",\"status\":\"200\",\"responseTime\":\"2.770\"}","timestamp":"2025-01-17T16:25:14.891Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Example app listening at http://localhost:3005","timestamp":"2025-01-21T17:08:26.901Z"}
+{"level":"\u001b[31merror\u001b[39m","message":"{\"schemaVoilations\":[{\"validation\":\"url\",\"code\":\"invalid_string\",\"message\":\"Invalid media url\",\"path\":[\"body\",\"media\"]}]}","timestamp":"2025-01-21T17:08:44.273Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/quote\",\"status\":\"400\",\"responseTime\":\"14.267\"}","timestamp":"2025-01-21T17:08:44.302Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/quote\",\"status\":\"200\",\"responseTime\":\"390.372\"}","timestamp":"2025-01-21T17:12:37.837Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/quote/one/678fd5850ac4d91f45cedf02\",\"status\":\"200\",\"responseTime\":\"189.806\"}","timestamp":"2025-01-21T17:15:27.571Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/quote\",\"status\":\"200\",\"responseTime\":\"354.335\"}","timestamp":"2025-01-21T17:16:11.342Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/quote/one/678fd5850ac4d91f45cedf02\",\"status\":\"400\",\"responseTime\":\"149.272\"}","timestamp":"2025-01-21T17:19:45.185Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/quote/one/678fd5850ac4d91f45cedf02\",\"status\":\"200\",\"responseTime\":\"171.177\"}","timestamp":"2025-01-21T17:20:08.529Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/quote/one/678fd65a0ac4d91f45cedf03\",\"status\":\"200\",\"responseTime\":\"162.335\"}","timestamp":"2025-01-21T17:20:50.358Z"}
