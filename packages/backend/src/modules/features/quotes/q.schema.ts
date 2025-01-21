@@ -17,7 +17,7 @@ const quoteSchema = (function() {
             userId: string().min(24).max(24).optional(),
             content: string().min(3).max(500).optional(),
             media: string().url({message: "Invalid media url"}).optional(),
-            reactionIds: string().emoji().array().optional(),
+            reactionIds: string().min(24).max(24).array().optional(),
             reflectionIds: string().min(24).max(24).array().optional()
         })
     });
