@@ -13,6 +13,7 @@ router.get("/all",
     reactionsController.getAllReactions);
 
 // Create a reaction for a given quote
+//TODO: Enforce only one reaction creation
 router.post("/:quoteId", 
     validateToken,
     validateSchema(reactionsSchema.getQuoteByIDSchema),

@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { COLLECTIONS } from "../../../config/db_config";
 import DbConfig from "../../../database";
 import logger from "../../../globals/utils/logger";
@@ -26,19 +27,34 @@ const reactionService = (function() {
             if (!database) {
               return null;
             }
-            const quote = await database
+            const reaction = await database
               .collection(COLLECTIONS.REACTIONS)
               .findOne(filter);
-            return quote;
+            return reaction;
           } catch (error) {
             logger.error(error as Error);
             return null;
           }
     }
 
+    const updateReaction = async (id: string, data: {}) => {
+      try {
+        const database = DbConfig.getDb();
+        if (!database) {
+          return null;
+        }
+        const reaction = await database.collection(COLLECTIONS.REACTIONS).updateOne({ _id: new ObjectId(id) }, { $set: data });
+        return reaction;
+      } catch (error) {
+        logger.error(error as Error);
+        return null;
+      }
+    }
+
     return {
         createReaction,
-        getOneReactionByFilter
+        getOneReactionByFilter,
+        updateReaction
     }
 })();
 

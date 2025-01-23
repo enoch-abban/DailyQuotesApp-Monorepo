@@ -10,7 +10,8 @@ import { parseMongoFilter } from "./globals/middleware/parseMongoFilter.middlewa
 // Routers Import
 import healthCheckRoute from "./modules/healthCheck/hc.routes";
 import authRoute from "./modules/authentication/auth.routes"
-import quotesroute from "./modules/features/quotes/q.routes"
+import quotesRoute from "./modules/features/quotes/q.routes"
+import reactionsRoute from "./modules/features/reactions/r.routes"
 
 const app = express();
 const morganFormat = ":method :url :status :response-time ms";
@@ -40,7 +41,8 @@ app.use(parseMongoFilter);
 
 app.use(`${API_VERSION_ROUTE}/healthcheck`, healthCheckRoute);
 app.use(`${API_VERSION_ROUTE}/auth`, authRoute);
-app.use(`${API_VERSION_ROUTE}/quote`, quotesroute);
+app.use(`${API_VERSION_ROUTE}/quote`, quotesRoute);
+app.use(`${API_VERSION_ROUTE}/reaction`, reactionsRoute);
 
 app.get("/", (req, res) => {
   res.status(200).json({

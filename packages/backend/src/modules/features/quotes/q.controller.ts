@@ -63,9 +63,9 @@ const quoteController = (function () {
         const user_id = req.app.locals.jwt.userId as string
         const quote_id = new ObjectId(req.params.id as string)
 
-        const retrieved_quote = (await quoteService.getQuoteByFilter({
+        const retrieved_quote = (await quoteService.getQuoteByFilterAggregation({
             _id: quote_id,
-        })) as WithId<UpdateQuoteModel> | null
+        }))
         if (!retrieved_quote) {
             return res
                 .status(404) //not found
@@ -74,7 +74,7 @@ const quoteController = (function () {
                     message: `Quote with id "${req.params.id}" not found☕!`,
                 } as ErrorResponse)
         }
-
+        console.log("UserQuote >>>", retrieved_quote);
         if (retrieved_quote.userId !== user_id) {
             return res
                 .status(400) //bad request
@@ -87,7 +87,7 @@ const quoteController = (function () {
         return res.status(200).json({
             data: retrieved_quote,
             message: "Quote retrieved successfully!",
-        } as ApiResponse<WithId<UpdateQuoteModel>>)
+        } as ApiResponse<{}>)
     })
 
     const getUserQuotes = asyncHandler(async (req, res) => {
