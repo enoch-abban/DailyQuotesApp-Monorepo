@@ -1,9 +1,13 @@
 import { CreatedUpdatedAtType } from "../../../globals/global.types";
-import { OptionalId, WithId } from "mongodb";
+import { ObjectId, OptionalId, WithId } from "mongodb";
 
 
 export type ReactionModel = OptionalId<{
-    userId?: string;
-    quoteId?: string;
     emoji?: string;
+    quoteId?: string;
+    user?: {
+        _id: ObjectId;
+        name: string;
+        image: string;
+    };
 } & CreatedUpdatedAtType>

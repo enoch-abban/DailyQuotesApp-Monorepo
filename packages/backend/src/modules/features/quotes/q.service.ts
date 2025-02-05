@@ -36,7 +36,11 @@ const quoteService = (function(){
           .collection(COLLECTIONS.QUOTES)
           .aggregate(getFullQuoteAggregation({ _id: id }))
           .toArray();
-        return quote[0];
+        
+        if (quote.length > 0) {
+          return quote[0];
+        }
+        return null;
 
       } catch (error) {
         const err = error as Error;
@@ -56,7 +60,8 @@ const quoteService = (function(){
               .findOne(filter);
             return quote;
           } catch (error) {
-            logger.error(error as Error);
+            const err = error as Error;
+            logger.error(JSON.stringify({type: err.name, message:err.message, stack:err.stack}));
             return null;
           }
     }

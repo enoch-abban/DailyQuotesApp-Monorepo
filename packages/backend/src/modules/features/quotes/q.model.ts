@@ -1,10 +1,11 @@
 import { TypeOf } from "zod"
 import { CreatedUpdatedAtType } from "../../../globals/global.types"
 import quoteSchema from "./q.schema"
+import { ReactionModel } from "../reactions/r.models"
 
 export type CreateQuoteModel = TypeOf<typeof quoteSchema.createQuote>["body"] &
     CreatedUpdatedAtType
-export type UpdateQuoteModel = TypeOf<typeof quoteSchema.updateQuote>["body"] &
+export type UpdateQuoteModel = TypeOf<typeof quoteSchema.updateQuote>["body"] & {reactions: ReactionModel[]} &
     CreatedUpdatedAtType
 
 export const getFullQuoteAggregation = (filter: {}) => {

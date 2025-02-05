@@ -11,12 +11,13 @@ const quoteController = (function () {
         const { userId } = req.app.locals.jwt
 
         // add necessary data
-        data.userId = userId
-        data.media = data.media ?? ""
-        data.reactionIds = []
-        data.reflectionIds = []
-        data.createdAt = new Date().toISOString()
-        data.updatedAt = new Date().toISOString()
+        data.userId = userId;
+        data.media = data.media ?? "";
+        data.reactionIds = [];
+        data.reactions = [];
+        data.reflectionIds = [];
+        data.createdAt = new Date().toISOString();
+        data.updatedAt = new Date().toISOString();
 
         const saved_quote = await quoteService.saveQuote(data)
         if (!saved_quote || !saved_quote.acknowledged) {
@@ -49,7 +50,7 @@ const quoteController = (function () {
         return res.status(200).json({
             data: retrieved_quote,
             message: "Quote created successfully!🍻!",
-        } as ApiResponse<UpdateQuoteModel>)
+        } as unknown as ApiResponse<UpdateQuoteModel>)
     })
 
     const updateQuote = asyncHandler(async (req, res) => {
@@ -63,7 +64,7 @@ const quoteController = (function () {
         const user_id = req.app.locals.jwt.userId as string
         const quote_id = new ObjectId(req.params.id as string)
 
-        const retrieved_quote = (await quoteService.getQuoteByFilterAggregation({
+        const retrieved_quote = (await quoteService.getQuoteByFilter({
             _id: quote_id,
         }))
         if (!retrieved_quote) {
