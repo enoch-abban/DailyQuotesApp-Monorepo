@@ -2,19 +2,20 @@ import { ErrorResponse } from "@dqa/shared-data";
 import { COLLECTIONS } from "../../../config/db_config";
 import DbConfig from "../../../database";
 import logger from "../../../globals/utils/logger";
-import { getFullQuoteAggregation, UpdateQuoteModel } from "./q.model";
-import { ObjectId, WithId } from "mongodb";
+import { getFullReflectionAggregation, UpdateReflectionModel } from "./r.model";
+import { ObjectId, PushOperator, WithId } from "mongodb";
 
 
-const quoteService = (function(){
+const reflectionService = (function(){
 
-    const saveQuote = async (data: {}) => {
+    const saveReflection = async (quote_id: ObjectId, data: {}) => {
         try {
             const database = DbConfig.getDb();
             if (!database) {
               return null;
             }
-            const result = await database.collection(COLLECTIONS.QUOTES).insertOne(data);
+            const result = await database.collection(COLLECTIONS.REFLECTIONS).insertOne(data);
+            await database.collection(COLLECTIONS.QUOTES).updateOne({_id:quote_id}, {$push: {reflectionIds: result.insertedId} as PushOperator<Document>})
             return result;
           } catch (error) {
             logger.error(error as ErrorResponse);
@@ -34,7 +35,7 @@ const quoteService = (function(){
 
         const quote = await database
           .collection(COLLECTIONS.QUOTES)
-          .aggregate(getFullQuoteAggregation({ _id: id }))
+          .aggregate(getFullReflectionAggregation({ _id: id }))
           .toArray();
         
         if (quote.length > 0) {
@@ -49,15 +50,15 @@ const quoteService = (function(){
       }  
     }
 
-    const getQuoteByFilter = async (filter: {}) => {
+    const getReflectionByFilter = async (filter: {}) => {
         try {
             const database = DbConfig.getDb();
             if (!database) {
               return null;
             }
-            const quote = await database
-              .collection(COLLECTIONS.QUOTES)
-              .findOne(filter) as WithId<UpdateQuoteModel> | null;
+            const quote: WithId<UpdateReflectionModel> | null = await database
+              .collection(COLLECTIONS.REFLECTIONS)
+              .findOne(filter);
             return quote;
           } catch (error) {
             const err = error as Error;
@@ -74,7 +75,7 @@ const quoteService = (function(){
         }
         const quote = await database
           .collection(COLLECTIONS.QUOTES)
-          .aggregate(getFullQuoteAggregation(filter))
+          .aggregate(getFullReflectionAggregation(filter))
           .toArray();
         return quote[0];
       } catch (error) {
@@ -85,11 +86,11 @@ const quoteService = (function(){
     }
 
     return {
-        saveQuote, 
+        saveReflection, 
         updateQuote,
-        getQuoteByFilter,
+        getReflectionByFilter,
         getQuoteByFilterAggregation
     }
 })();
 
-export default quoteService;
+export default reflectionService;

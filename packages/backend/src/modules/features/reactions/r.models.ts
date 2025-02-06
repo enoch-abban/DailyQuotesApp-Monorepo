@@ -5,6 +5,7 @@ import { ObjectId, OptionalId, WithId } from "mongodb";
 export type ReactionModel = OptionalId<{
     emoji?: string;
     quoteId?: string;
+    reflectionId?: string;
     user?: {
         _id: ObjectId;
         name: string;

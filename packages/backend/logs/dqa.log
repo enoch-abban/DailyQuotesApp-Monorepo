@@ -255,3 +255,21 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PATCH\",\"url\":\"/api/v1/reaction/679d07821e36ecab077d0293/679d07cc1e36ecab077d0294\",\"status\":\"200\",\"responseTime\":\"624.755\"}","timestamp":"2025-01-31T18:48:22.696Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"Example app listening at http://localhost:3005","timestamp":"2025-02-05T15:48:31.809Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PATCH\",\"url\":\"/api/v1/reaction/679d07821e36ecab077d0293/679d19e3b1c8192ea6422442\",\"status\":\"200\",\"responseTime\":\"580.112\"}","timestamp":"2025-02-05T15:49:42.276Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Example app listening at http://localhost:3005","timestamp":"2025-02-05T15:53:48.533Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PATCH\",\"url\":\"/api/v1/reaction/679d07821e36ecab077d0293/679d19e3b1c8192ea6422442\",\"status\":\"200\",\"responseTime\":\"489.677\"}","timestamp":"2025-02-05T15:56:16.553Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Example app listening at http://localhost:3005","timestamp":"2025-02-06T16:54:00.501Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/quote\",\"status\":\"200\",\"responseTime\":\"1547.086\"}","timestamp":"2025-02-06T17:04:11.408Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/reaction/quote\",\"status\":\"404\",\"responseTime\":\"183.191\"}","timestamp":"2025-02-06T17:05:10.685Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Example app listening at http://localhost:3005","timestamp":"2025-02-06T17:07:45.120Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/reaction/quote\",\"status\":\"200\",\"responseTime\":\"642.137\"}","timestamp":"2025-02-06T17:07:54.055Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Example app listening at http://localhost:3005","timestamp":"2025-02-06T17:19:30.990Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/reaction/quote\",\"status\":\"400\",\"responseTime\":\"181.304\"}","timestamp":"2025-02-06T17:20:17.090Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/reaction/quote\",\"status\":\"200\",\"responseTime\":\"775.240\"}","timestamp":"2025-02-06T17:20:44.731Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PATCH\",\"url\":\"/api/v1/reaction/quote/679d10e3d6e6db5f2c89987f\",\"status\":\"404\",\"responseTime\":\"516.029\"}","timestamp":"2025-02-06T17:21:57.251Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PATCH\",\"url\":\"/api/v1/reaction/quote/679d10e3d6e6db5f2c89987f\",\"status\":\"404\",\"responseTime\":\"167.590\"}","timestamp":"2025-02-06T17:23:10.618Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PATCH\",\"url\":\"/api/v1/reaction/quote/67a4ef6cce96ff77baa01663\",\"status\":\"200\",\"responseTime\":\"412.137\"}","timestamp":"2025-02-06T17:24:17.575Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/reflection\",\"status\":\"200\",\"responseTime\":\"605.588\"}","timestamp":"2025-02-06T17:28:57.667Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/quote/one/67a4eb896791bb5f4612bd0a\",\"status\":\"200\",\"responseTime\":\"186.022\"}","timestamp":"2025-02-06T17:30:25.176Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/reaction/reflection\",\"status\":\"404\",\"responseTime\":\"997.969\"}","timestamp":"2025-02-06T17:52:23.292Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Example app listening at http://localhost:3005","timestamp":"2025-02-06T17:58:47.028Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/reaction/reflection\",\"status\":\"404\",\"responseTime\":\"182.415\"}","timestamp":"2025-02-06T17:59:01.489Z"}

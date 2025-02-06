@@ -12,26 +12,40 @@ router.get("/all",
     validatePermission(["admin"]),
     reactionsController.getAllReactions);
 
-// Create a reaction for a given quote
-//TODO: Enforce only one reaction creation
-router.post("/:quoteId", 
+// Create a reaction for a quote
+router.post("/quote", 
     validateToken,
-    validateSchema(reactionsSchema.getQuoteByIDSchema),
+    // validateSchema(reactionsSchema.getQuoteByIDSchema),
     validateSchema(reactionsSchema.createReaction),
     reactionsController.createReaction);
 
+// Create a reaction for a reflection
+router.post("/reflection", 
+    validateToken,
+    // validateSchema(reactionsSchema.getQuoteByIDSchema),
+    validateSchema(reactionsSchema.createReflectionReaction),
+    reactionsController.createReflectionReaction);
+
 // Get all the reactions from a single quote
-router.get("/:quoteId", 
+router.get("/quote/:quoteId", 
     validateToken,
     validateSchema(reactionsSchema.getQuoteByIDSchema),
     reactionsController.getQuoteReactions);
 
-// Edit a reaction for a given quote
-router.patch("/:quoteId/:id", 
+// Edit a quote's reaction by it's ID
+router.patch("/quote/:id", 
     validateToken,
-    validateSchema(reactionsSchema.getQuoteByIDSchema),
+    // validateSchema(reactionsSchema.getQuoteByIDSchema),
     validateSchema(globalSchema.getByIdSchema),
     validateSchema(reactionsSchema.createReaction),
     reactionsController.updateReaction);
+
+// Edit a reflection's reaction by it's ID
+router.patch("/reflection/:id", 
+    validateToken,
+    // validateSchema(reactionsSchema.getQuoteByIDSchema),
+    validateSchema(globalSchema.getByIdSchema),
+    validateSchema(reactionsSchema.createReflectionReaction),
+    reactionsController.updateReflectionReaction);
 
 export default router;

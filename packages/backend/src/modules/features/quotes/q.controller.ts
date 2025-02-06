@@ -8,12 +8,11 @@ import { ObjectId, WithId } from "mongodb"
 const quoteController = (function () {
     const createQuote = asyncHandler(async (req, res) => {
         const data = req.body
-        const { userId } = req.app.locals.jwt
+        const userId = req.app.locals.jwt.userId as string
 
         // add necessary data
-        data.userId = userId;
+        data.userId = new ObjectId(userId);
         data.media = data.media ?? "";
-        data.reactionIds = [];
         data.reactions = [];
         data.reflectionIds = [];
         data.createdAt = new Date().toISOString();
@@ -64,7 +63,7 @@ const quoteController = (function () {
         const user_id = req.app.locals.jwt.userId as string
         const quote_id = new ObjectId(req.params.id as string)
 
-        const retrieved_quote = (await quoteService.getQuoteByFilter({
+        const retrieved_quote = (await quoteService.getQuoteByFilterAggregation({
             _id: quote_id,
         }))
         if (!retrieved_quote) {
@@ -76,7 +75,7 @@ const quoteController = (function () {
                 } as ErrorResponse)
         }
         console.log("UserQuote >>>", retrieved_quote);
-        if (retrieved_quote.userId !== user_id) {
+        if (retrieved_quote.userId?.toString() !== user_id) {
             return res
                 .status(400) //bad request
                 .json({

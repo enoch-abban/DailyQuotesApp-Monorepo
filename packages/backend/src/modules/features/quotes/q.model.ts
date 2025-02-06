@@ -2,10 +2,11 @@ import { TypeOf } from "zod"
 import { CreatedUpdatedAtType } from "../../../globals/global.types"
 import quoteSchema from "./q.schema"
 import { ReactionModel } from "../reactions/r.models"
+import { ObjectId } from "mongodb"
 
 export type CreateQuoteModel = TypeOf<typeof quoteSchema.createQuote>["body"] &
     CreatedUpdatedAtType
-export type UpdateQuoteModel = TypeOf<typeof quoteSchema.updateQuote>["body"] & {reactions: ReactionModel[]} &
+export type UpdateQuoteModel = TypeOf<typeof quoteSchema.updateQuote>["body"] & {userId:ObjectId, reflectionIds: ObjectId[], reactions: ReactionModel[]} &
     CreatedUpdatedAtType
 
 export const getFullQuoteAggregation = (filter: {}) => {
@@ -22,153 +23,9 @@ export const getFullQuoteAggregation = (filter: {}) => {
             },
         },
         {
-            $lookup: {
-                from: "Reactions",
-                localField: "_id",
-                foreignField: "quoteId",
-                as: "reactionIds",
-            },
-        },
-        {
-            $lookup: {
-                from: "Reflections",
-                localField: "_id",
-                foreignField: "quoteId",
-                as: "reflectionIds",
-            },
-        },
-        {
             $unwind: {
                 path: "$user",
                 preserveNullAndEmptyArrays: true, // If no user is found, keep the field as null
-            },
-        },
-        {
-            $lookup: {
-                from: "Users",
-                let: { reactionUserIds: "$reactionIds.userId" },
-                pipeline: [
-                    {
-                        $match: {
-                            $expr: { $in: ["$_id", "$$reactionUserIds"] },
-                        },
-                    },
-                    {
-                        $project: {
-                            email: 0,
-                            gender: 0,
-                            phone: 0,
-                            createdAt: 0,
-                            updatedAt: 0,
-                        },
-                    },
-                ],
-                as: "reactionUserDetails",
-            },
-        },
-        {
-            $lookup: {
-                from: "Users",
-                let: {
-                    reflectionReactionUserIds:
-                        "$reflectionIds.reactionIds.userId",
-                },
-                pipeline: [
-                    {
-                        $match: {
-                            $expr: {
-                                $in: ["$_id", "$$reflectionReactionUserIds"],
-                            },
-                        },
-                    },
-                    {
-                        $project: {
-                            email: 0,
-                            gender: 0,
-                            phone: 0,
-                            createdAt: 0,
-                            updatedAt: 0,
-                        },
-                    },
-                ],
-                as: "reflectionReactionUserDetails",
-            },
-        },
-        {
-            $addFields: {
-                reactionIds: {
-                    $map: {
-                        input: "$reactionIds",
-                        as: "reaction",
-                        in: {
-                            $mergeObjects: [
-                                "$$reaction",
-                                {
-                                    user: {
-                                        $arrayElemAt: [
-                                            {
-                                                $filter: {
-                                                    input: "$reactionUserDetails",
-                                                    as: "reactionUser",
-                                                    cond: {
-                                                        $eq: [
-                                                            "$$reactionUser._id",
-                                                            "$$reaction.userId",
-                                                        ],
-                                                    },
-                                                },
-                                            },
-                                            0,
-                                        ],
-                                    },
-                                },
-                            ],
-                        },
-                    },
-                },
-                reflectionIds: {
-                    $map: {
-                        input: "$reflectionIds",
-                        as: "reflection",
-                        in: {
-                            $mergeObjects: [
-                                "$$reflection",
-                                {
-                                    reactionIds: {
-                                        $map: {
-                                            input: "$$reflection.reactionIds",
-                                            as: "reaction",
-                                            in: {
-                                                $mergeObjects: [
-                                                    "$$reaction",
-                                                    {
-                                                        user: {
-                                                            $arrayElemAt: [
-                                                                {
-                                                                    $filter: {
-                                                                        input: "$reflectionReactionUserDetails",
-                                                                        as: "reflectionReactionUser",
-                                                                        cond: {
-                                                                            $eq: [
-                                                                                "$$reflectionReactionUser._id",
-                                                                                "$$reaction.userId",
-                                                                            ],
-                                                                        },
-                                                                    },
-                                                                },
-                                                                0,
-                                                            ],
-                                                        },
-                                                    },
-                                                ],
-                                            },
-                                        },
-                                    },
-                                },
-                            ],
-                        },
-                    },
-                },
             },
         },
         {
@@ -178,8 +35,9 @@ export const getFullQuoteAggregation = (filter: {}) => {
                 "user.phone": 0,
                 "user.createdAt": 0,
                 "user.updatedAt": 0,
-                reactionUserDetails: 0,
-                reflectionReactionUserDetails: 0,
+                "user.verified":0,
+                "user.password":0,
+                "user.role":0,
             },
         },
     ]
