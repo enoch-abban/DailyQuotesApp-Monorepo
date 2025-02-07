@@ -273,3 +273,14 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/reaction/reflection\",\"status\":\"404\",\"responseTime\":\"997.969\"}","timestamp":"2025-02-06T17:52:23.292Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"Example app listening at http://localhost:3005","timestamp":"2025-02-06T17:58:47.028Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/reaction/reflection\",\"status\":\"404\",\"responseTime\":\"182.415\"}","timestamp":"2025-02-06T17:59:01.489Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Example app listening at http://localhost:3005","timestamp":"2025-02-06T18:00:09.475Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/reaction/reflection\",\"status\":\"200\",\"responseTime\":\"535.698\"}","timestamp":"2025-02-06T18:00:19.143Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"PATCH\",\"url\":\"/api/v1/reaction/reflection/67a4f8b24b56ba3b9fc069e5\",\"status\":\"200\",\"responseTime\":\"343.232\"}","timestamp":"2025-02-06T18:03:56.135Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Example app listening at http://localhost:3005","timestamp":"2025-02-07T11:16:47.733Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/quote/one/679d07821e36ecab077d0293\",\"status\":\"200\",\"responseTime\":\"545.244\"}","timestamp":"2025-02-07T11:17:00.142Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Example app listening at http://localhost:3005","timestamp":"2025-02-07T11:33:00.649Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/reflection/67a4f159ce96ff77baa01664\",\"status\":\"400\",\"responseTime\":\"173.413\"}","timestamp":"2025-02-07T11:33:26.481Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/reflection/67a4f159ce96ff77baa01664\",\"status\":\"200\",\"responseTime\":\"168.651\"}","timestamp":"2025-02-07T11:35:30.491Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/reflection/67a4f159ce96ff77baa01664\",\"status\":\"200\",\"responseTime\":\"1298.866\"}","timestamp":"2025-02-07T12:23:45.176Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"Example app listening at http://localhost:3005","timestamp":"2025-02-07T13:45:40.911Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/reflection/67a4f159ce96ff77baa01664\",\"status\":\"200\",\"responseTime\":\"219.591\"}","timestamp":"2025-02-07T13:48:02.954Z"}

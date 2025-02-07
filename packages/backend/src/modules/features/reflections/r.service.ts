@@ -67,14 +67,14 @@ const reflectionService = (function(){
           }
     }
 
-    const getQuoteByFilterAggregation = async (filter: {}) => {
+    const getReflectionByFilterAggregation = async (filter: {}) => {
       try {
         const database = DbConfig.getDb();
         if (!database) {
           return null;
         }
         const quote = await database
-          .collection(COLLECTIONS.QUOTES)
+          .collection(COLLECTIONS.REFLECTIONS)
           .aggregate(getFullReflectionAggregation(filter))
           .toArray();
         return quote[0];
@@ -89,7 +89,7 @@ const reflectionService = (function(){
         saveReflection, 
         updateQuote,
         getReflectionByFilter,
-        getQuoteByFilterAggregation
+        getReflectionByFilterAggregation
     }
 })();
 

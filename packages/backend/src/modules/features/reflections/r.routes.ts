@@ -27,9 +27,9 @@ router.patch("/:id",
     validateSchema(reflectionSchema.updateReflection),
     reflectionController.updateReflection);
 
-router.get("/:quoteId/:id", 
+router.get("/:id", 
     validateToken,
-    validateSchema(reactionsSchema.getQuoteByIDSchema),
+    // validateSchema(reactionsSchema.getQuoteByIDSchema),
     validateSchema(globalSchema.getByIdSchema),
     reflectionController.getUserReflection);
 

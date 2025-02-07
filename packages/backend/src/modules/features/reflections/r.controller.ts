@@ -26,6 +26,7 @@ const reflectionController = (function () {
         }
 
         // add necessary data
+        data.quoteId = quote_id;
         data.userId = new ObjectId(userId as string);
         data.reactions = [];
         data.reflectionIds = [];
@@ -76,10 +77,11 @@ const reflectionController = (function () {
 
     const getUserReflection = asyncHandler(async (req, res) => {
         const user_id = req.app.locals.jwt.userId as string
-        const quote_id = new ObjectId(req.params.id as string)
+        // const quote_id = new ObjectId(req.params.quoteId as string);
+        const reflection_id = new ObjectId(req.params.id as string);
 
-        const retrieved_reflection = (await reflectionService.getReflectionByFilter({
-            _id: quote_id,
+        const retrieved_reflection = (await reflectionService.getReflectionByFilterAggregation({
+            _id: reflection_id,
         }))
         if (!retrieved_reflection) {
             return res
@@ -89,14 +91,14 @@ const reflectionController = (function () {
                     message: `Reflection with id "${req.params.id}" not found☕!`,
                 } as ErrorResponse)
         }
-        console.log("UserReflection >>>", retrieved_reflection);
+        // console.log("UserReflection >>>", retrieved_reflection);
         if (retrieved_reflection.userId?.toString() !== user_id) {
             return res
                 .status(400) //bad request
                 .json({
                     data: null,
                     message: `Merrhn😒, you do not own this reflection☕!`,
-                } as ErrorResponse)
+                } as ErrorResponse);
         }
 
         return res.status(200).json({
