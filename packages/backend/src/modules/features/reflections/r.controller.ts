@@ -52,14 +52,14 @@ const reflectionController = (function () {
         if (!retrieved_reflection) {
             logger.error(
                 `[createReflection]: Error while retrieving reflection with id "${saved_reflection.insertedId.toString()}" from Db!`
-            )
+            );
             return res
                 .status(503) //service unavailable
                 .json({
                     data: null,
                     message:
                         "Something unexpected happened. Try again in a while ☕",
-                } as ErrorResponse)
+                } as ErrorResponse);
         }
 
         return res.status(200).json({
@@ -69,9 +69,49 @@ const reflectionController = (function () {
     })
 
     const updateReflection = asyncHandler(async (req, res) => {
+        const user_id = req.app.locals.jwt.userId as string
+        const reflection_id = new ObjectId(req.params.id as string);
+        const data = req.body;
+
+        const retrieved_reflection = (await reflectionService.getReflectionByFilter({
+            _id: reflection_id,
+        }))
+        if (!retrieved_reflection) {
+            return res
+                .status(404) //not found
+                .json({
+                    data: null,
+                    message: `Reflection with id "${req.params.id}" not found☕!`,
+                } as ErrorResponse)
+        }
+        // console.log("UserReflection >>>", retrieved_reflection);
+        if (retrieved_reflection.userId?.toString() !== user_id) {
+            return res
+                .status(400) //bad request
+                .json({
+                    data: null,
+                    message: `Merrhn😒, you do not own this reflection☕!`,
+                } as ErrorResponse);
+        }
+
+        //update the reflection
+        const updated_reflection = await reflectionService.updateReflection(reflection_id, data);
+        if (!updated_reflection) {
+            logger.error(
+                `[updateReflection]: Error while updating reflection with id "${req.params.id}" to Db!`
+            );
+            return res
+                .status(503) //service unavailable
+                .json({
+                    data: null,
+                    message:
+                        "Something unexpected happened. Try again in a while ☕",
+                } as ErrorResponse);
+        }
+
         return res.status(200).json({
-            data: {},
-            message: "Quote updated successfully!🍻!",
+            data: updated_reflection,
+            message: "Reflection updated successfully!🍻!",
         } as ApiResponse<{}>)
     })
 

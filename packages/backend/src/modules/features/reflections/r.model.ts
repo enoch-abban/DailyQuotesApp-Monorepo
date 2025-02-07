@@ -11,7 +11,7 @@ export type CreateReflectionModel = TypeOf<
     CreatedUpdatedAtType
 export type UpdateReflectionModel = TypeOf<
     typeof reflectionSchema.updateReflection
->["body"] & { reactions?: ReactionModel[], userId?: ObjectId } & CreatedUpdatedAtType
+>["body"] & { reflectionIds?: ObjectId[],reactions?: ReactionModel[], userId?: ObjectId } & CreatedUpdatedAtType
 
 export const getFullReflectionAggregation = (filter:{}) => {
     return [

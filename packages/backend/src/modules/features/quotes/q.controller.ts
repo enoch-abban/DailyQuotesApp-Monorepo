@@ -43,7 +43,7 @@ const quoteController = (function () {
                     data: null,
                     message:
                         "Something unexpected happened. Try again in a while ☕",
-                } as ErrorResponse)
+                } as ErrorResponse);
         }
 
         return res.status(200).json({
@@ -53,8 +53,48 @@ const quoteController = (function () {
     })
 
     const updateQuote = asyncHandler(async (req, res) => {
+        const user_id = req.app.locals.jwt.userId as string
+        const quote_id = new ObjectId(req.params.id as string)
+        const data = req.body;
+
+        const retrieved_quote = (await quoteService.getQuoteByFilter({
+            _id: quote_id,
+        }))
+        if (!retrieved_quote) {
+            return res
+                .status(404) //not found
+                .json({
+                    data: null,
+                    message: `Quote with id "${req.params.id}" not found☕!`,
+                } as ErrorResponse)
+        }
+        // console.log("UserQuote >>>", retrieved_quote);
+        if (retrieved_quote.userId?.toString() !== user_id) {
+            return res
+                .status(400) //bad request
+                .json({
+                    data: null,
+                    message: `Merrhn😒, you do not own this quote☕!`,
+                } as ErrorResponse)
+        }
+
+        // update the quote
+        const updated_quote = await quoteService.updateQuote(quote_id, data);
+        if (!updated_quote) {
+            logger.error(
+                `[updateQuote]: Error while updating quote with id "${quote_id.toString()}" to Db!`
+            )
+            return res
+                .status(503) //service unavailable
+                .json({
+                    data: null,
+                    message:
+                        "Something unexpected happened. Try again in a while ☕",
+                } as ErrorResponse);
+        }
+        
         return res.status(200).json({
-            data: {},
+            data: updated_quote,
             message: "Quote updated successfully!🍻!",
         } as ApiResponse<{}>)
     })
@@ -74,7 +114,7 @@ const quoteController = (function () {
                     message: `Quote with id "${req.params.id}" not found☕!`,
                 } as ErrorResponse)
         }
-        console.log("UserQuote >>>", retrieved_quote);
+        // console.log("UserQuote >>>", retrieved_quote);
         if (retrieved_quote.userId?.toString() !== user_id) {
             return res
                 .status(400) //bad request

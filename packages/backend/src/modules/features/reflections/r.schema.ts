@@ -12,9 +12,9 @@ const reflectionSchema = (function() {
 
     const updateReflection = object({
         body: object({
-            quoteId: string({message: "Invalid id passed☕!"}).min(24).max(24).optional(),
+            // quoteId: string({message: "Invalid id passed☕!"}).min(24).max(24).optional(),
             content: string().min(3).max(500).optional(),
-            reflectionIds: string().min(24).max(24).array().optional()
+            // reflectionIds: string().min(24).max(24).array().optional()
         })
     });
 

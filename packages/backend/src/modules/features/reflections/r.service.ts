@@ -23,18 +23,18 @@ const reflectionService = (function(){
           }
     }
 
-    const updateQuote = async (id: ObjectId, data: {}) => {
+    const updateReflection = async (id: ObjectId, data: {}) => {
       try {
         const database = DbConfig.getDb();
         if (!database) {
           return null;
         }
         await database
-        .collection(COLLECTIONS.QUOTES)
+        .collection(COLLECTIONS.REFLECTIONS)
         .updateOne({ _id: id }, { $set: data });
 
         const quote = await database
-          .collection(COLLECTIONS.QUOTES)
+          .collection(COLLECTIONS.REFLECTIONS)
           .aggregate(getFullReflectionAggregation({ _id: id }))
           .toArray();
         
@@ -87,7 +87,7 @@ const reflectionService = (function(){
 
     return {
         saveReflection, 
-        updateQuote,
+        updateReflection,
         getReflectionByFilter,
         getReflectionByFilterAggregation
     }
